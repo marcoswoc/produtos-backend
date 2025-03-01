@@ -1,4 +1,5 @@
-﻿using Produtos.Domain.Enums;
+﻿using Produtos.Domain.Entities.Base;
+using Produtos.Domain.Enums;
 
 namespace Produtos.Domain.Entities;
 
