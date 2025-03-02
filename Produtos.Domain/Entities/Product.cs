@@ -15,4 +15,18 @@ public class Product(
     public decimal Price { get; private set; } = price;
     public Category Category { get; private set; } = category;
     public string ImageUrl { get; private set; } = imageUrl;
+
+    public void Update(
+        string name,
+        string description,
+        decimal price,
+        Category category,
+        string imageUrl)
+    {
+        Name = name;
+        Description = description;
+        Price = price;
+        Category = category;
+        ImageUrl = imageUrl;
+    }
 }
