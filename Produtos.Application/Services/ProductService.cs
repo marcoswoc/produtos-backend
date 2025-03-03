@@ -43,18 +43,18 @@ public class ProductService(
         return _mapper.Map<ProductDto>(product);
     }
 
-    public async Task UpdateAsync(Guid id, CreateProductDto createProductDto)
+    public async Task UpdateAsync(Guid id, UpdateProductDto updateProductDto)
     {
         var product = await _repository.GetByIdAsync(id);
 
         if (product is not null)
         {
             product.Update(
-                createProductDto.Name,
-                createProductDto.Description,
-                createProductDto.Price,
-                createProductDto.Category,
-                createProductDto.ImageUrl);
+                updateProductDto.Name,
+                updateProductDto.Description,
+                updateProductDto.Price,
+                updateProductDto.Category,
+                updateProductDto.ImageUrl);
 
             await _repository.UpdateAsync(product);
         }
