@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Produtos.Application.Dtos.Base;
 using Produtos.Application.Dtos.Products;
 using Produtos.Application.Interfaces;
 using Produtos.Domain.Entities;
 using Produtos.Domain.Repositories;
+using Produtos.Infrastructure.Storage;
 
 namespace Produtos.Application.Services;
 public class ProductService(
     IProductRepository _repository,
+    AzureStorageService _azureStorageService,
     IMapper _mapper) : IProductService
 {
     public async Task<ProductDto> AddAsync(CreateProductDto createProductDto)
@@ -58,6 +61,13 @@ public class ProductService(
 
             await _repository.UpdateAsync(product);
         }
+    }
+
+    public async Task<string> UploadAsync(IFormFile file)
+    {
+        using var stream = file.OpenReadStream();
+
+        return await _azureStorageService.UploadBlobAsync("produto-image", file.Name, stream);
     }
 }
 

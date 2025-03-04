@@ -1,0 +1,40 @@
+services:
+  produtos.api:
+    image: ${DOCKER_REGISTRY-}produtosapi
+    build:
+      context: .
+      dockerfile: Produtos.Api/Dockerfile
+    depends_on:
+      - sqlserver
+      - azurite
+    environment:
+      - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
+      - AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    networks:
+      - produtos-network
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "${SQLSERVER_SA_PASSWORD}"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - produtos-network
+
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: azurite
+    ports:
+      - "10000:10000" # Blob Storage
+    networks:
+      - produtos-network
+
+networks:
+  produtos-network:
+    driver: bridge

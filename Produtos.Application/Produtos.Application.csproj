@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Produtos.Domain\Produtos.Domain.csproj" />
+    <ProjectReference Include="..\Produtos.Infrastructure\Produtos.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -50,4 +50,23 @@ public class ProductsController(IProductService _service) : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPost("upload")]
+    public async Task<IActionResult> UploadAsync([FromBody] IFormFile file)
+    {
+        if (file is null || file.Length > 0)
+            return BadRequest("Nenhum arquivo enviado.");
+
+        const long maxSizeBytes = 2 * 1024 * 1024;
+        if (file.Length > maxSizeBytes)
+            return BadRequest($"O arquivo excede o tamanho máximo de 2MB. O tamanho atual é {file.Length / 1024 / 1024}MB.");
+
+        var allowedMimeTypes = new[] { "image/jpeg", "image/png", "iamge/jpg" };
+        if (!allowedMimeTypes.Contains(file.ContentType))
+            return BadRequest("Tipo de arquivo não permitido. Apenas .jpg, .jpeg e .png são aceitos.");
+
+        var blobUrl = await _service.UploadAsync(file);
+
+        return Ok(blobUrl);
+    }
 }
