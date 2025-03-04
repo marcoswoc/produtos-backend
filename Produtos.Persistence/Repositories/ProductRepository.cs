@@ -4,6 +4,6 @@ using Produtos.Persistence.Context;
 using Produtos.Persistence.Repositories.Base;
 
 namespace Produtos.Persistence.Repositories;
-class ProductRepository(DataContext dbContext) : Repository<Product>(dbContext), IProductRepository
+public class ProductRepository(DataContext dbContext) : Repository<Product>(dbContext), IProductRepository
 {    
 }
