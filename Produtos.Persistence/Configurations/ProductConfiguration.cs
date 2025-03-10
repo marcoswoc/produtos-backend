@@ -24,6 +24,7 @@ public class ProductConfiguration : BaseMap<Product>
 
         builder.Property(product => product.Category)
             .HasConversion<string>()
+            .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(product => product.ImageUrl)
