@@ -8,6 +8,7 @@ public class PagedResultProfile : Profile
     public PagedResultProfile()
     {
         CreateMap(typeof(PagedResult<>), typeof(PagedResultDto<>));
+        CreateMap<PagedRequest, PagedRequestDto>();
     }
 }
 

@@ -7,7 +7,7 @@ public interface IProductService
 {
     Task<ProductDto> AddAsync(CreateProductDto createProductDto);
     Task<ProductDto?> GetByIdAsync(Guid id);
-    Task<PagedResultDto<ProductDto>> GetAllAsync(int pageNumber = 1, int pageSize = 10);
+    Task<PagedResultDto<ProductDto>> GetAllAsync(PagedRequestDto dto);
     Task UpdateAsync(Guid id, UpdateProductDto updateProductDto);
     Task DeleteAsync(Guid id);
     Task<string> UploadAsync(IFormFile file);

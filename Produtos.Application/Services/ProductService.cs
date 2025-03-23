@@ -5,6 +5,7 @@ using Produtos.Application.Dtos.Products;
 using Produtos.Application.Interfaces;
 using Produtos.Domain.Entities;
 using Produtos.Domain.Repositories;
+using Produtos.Domain.Repositories.Base;
 using Produtos.Infrastructure.Storage;
 
 namespace Produtos.Application.Services;
@@ -32,9 +33,10 @@ public class ProductService(
         await _repository.DeleteAsync(id);
     }
 
-    public async Task<PagedResultDto<ProductDto>> GetAllAsync(int pageNumber = 1, int pageSize = 10)
+    public async Task<PagedResultDto<ProductDto>> GetAllAsync(PagedRequestDto dto)
     {
-        var products = await _repository.GetAllAsync(pageNumber, pageSize);
+        var request = _mapper.Map<PagedRequest>(dto);
+        var products = await _repository.GetAllAsync(request);
 
         return _mapper.Map<PagedResultDto<ProductDto>>(products);
     }

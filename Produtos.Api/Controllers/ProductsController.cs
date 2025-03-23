@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Produtos.Application.Dtos.Base;
 using Produtos.Application.Dtos.Products;
 using Produtos.Application.Interfaces;
 
@@ -28,9 +29,9 @@ public class ProductsController(IProductService _service) : ControllerBase
     }    
 
     [HttpGet]
-    public async Task<IActionResult> GetAsync([FromQuery]int pageNumber, [FromQuery]int pageSize)
+    public async Task<IActionResult> GetAsync([FromQuery]PagedRequestDto dto)
     {
-        var products = await _service.GetAllAsync(pageNumber, pageSize);
+        var products = await _service.GetAllAsync(dto);
 
         return Ok(products);
     }

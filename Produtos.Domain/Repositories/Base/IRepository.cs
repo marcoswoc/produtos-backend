@@ -6,7 +6,7 @@ public interface IRepository<TEntity> where TEntity : Entity
 {
     Task<TEntity> AddAsync(TEntity entity);
     Task<TEntity?> GetByIdAsync(Guid id);
-    Task<PagedResult<TEntity>> GetAllAsync(int pageNumber = 1, int pageSize = 10, Expression<Func<TEntity, bool>>? filter = null);
+    Task<PagedResult<TEntity>> GetAllAsync(PagedRequest request, Expression<Func<TEntity, bool>>? filter = null);
     Task UpdateAsync(TEntity entity);
     Task DeleteAsync(Guid id);
 }

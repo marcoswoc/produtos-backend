@@ -29,8 +29,7 @@ public abstract class Repository<TEntity>(DataContext dbContext) : IRepository<T
     }
 
     public async Task<PagedResult<TEntity>> GetAllAsync(
-        int pageNumber = 1,
-        int pageSize = 10,
+        PagedRequest request,
         Expression<Func<TEntity, bool>>? filter = null)
     {
         var query = dbContext.Set<TEntity>()
@@ -43,16 +42,16 @@ public abstract class Repository<TEntity>(DataContext dbContext) : IRepository<T
         var total = await query.CountAsync();
 
         var itens = await query
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
+            .Skip((request.PageNumber - 1) * request.PageSize)
+            .Take(request.PageSize)
             .ToListAsync();
 
         return new()
         {
             Items = itens,
             Total = total,
-            PageNumeber = pageNumber,
-            PageSize = pageSize
+            PageNumeber = request.PageNumber,
+            PageSize = request.PageSize
         };
     }
 
