@@ -1,0 +1,31 @@
+﻿@Produtos.Api_HostAddress = https://localhost:7161
+
+GET {{Produtos.Api_HostAddress}}/api/produtos
+
+###
+
+POST {{Produtos.Api_HostAddress}}/api/produtos
+Content-Type: application/json
+
+{
+  //AdicionarProdutoModel
+}
+
+###
+
+DELETE {{Produtos.Api_HostAddress}}/api/produtos/{id}
+
+###
+
+GET {{Produtos.Api_HostAddress}}/api/produtos/{id}
+
+###
+
+PUT {{Produtos.Api_HostAddress}}/api/produtos/{id}
+Content-Type: application/json
+
+{
+  //AtualizarProdutoModel
+}
+
+###
