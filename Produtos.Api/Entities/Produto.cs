@@ -2,11 +2,27 @@
 
 namespace Produtos.Api.Entities;
 
-public class Produto
-{
-    public int Id { get; set; }
-    public string Nome { get; set; }
-    public string Descricao { get; set; }
-    public decimal Preco { get; set; }
-    public CategoriaProduto Categoria { get; set; }
+public class Produto(
+    string nome,
+    string descricao,
+    decimal preco,
+    CategoriaProduto categoria)
+{    
+    public int Id { get; private set; }
+    public string Nome { get; private set; } = nome;
+    public string Descricao { get; private set; } = descricao;
+    public decimal Preco { get; private set; } = preco;
+    public CategoriaProduto Categoria { get; private set; } = categoria;
+
+    public void Atualizar(
+        string nome,
+        string descricao,
+        decimal preco,
+        CategoriaProduto categoria)
+    {
+        Nome = nome;
+        Descricao = descricao;
+        Preco = preco;
+        Categoria = categoria;       
+    }
 }
